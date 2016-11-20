@@ -1,31 +1,28 @@
 "use strict";
 const route_1 = require("./route");
+const matches_controller_1 = require("../games/matches.controller");
 class GameRoute extends route_1.BaseRoute {
-    constructor() {
-        super();
-    }
-    static create(router) {
+    constructor(router) {
         console.log("[GameRoute::create] Creating game route.");
-        router.get("/game", (req, res, next) => {
-            if (req.body.which_player === undefined || req.body.number_matches == undefined) {
-                res.redirect("/");
-            }
-            new GameRoute().index(req, res, next);
-        });
-        router.post('/game', (req, res, next) => {
-            if (req.body.which_player === undefined || req.body.number_matches == undefined) {
-                res.redirect("/");
-            }
-            new GameRoute().index(req, res, next);
-        });
+        super();
+        this.router = router;
+        this.gameController = new matches_controller_1.MatchesController();
+        this.setRoutes();
     }
-    index(req, res, next) {
-        let options = {
-            "page_title": "Das Streichholzspiel",
-            "which_player": req.body.which_player,
-            "matches_left": req.body.number_matches
-        };
-        this.render(req, res, "game", options);
+    setRoutes() {
+        this.router.all('/matches', (req, res, next) => {
+            if (req.body === undefined)
+                res.redirect("/");
+            next();
+        });
+        this.router.post('/matches', (req, res, next) => {
+            if (req.body.number_matches !== undefined) {
+                this.gameController.start_game(req, res, this);
+            }
+            else {
+                this.gameController.continue_game(req, res, this);
+            }
+        });
     }
 }
 exports.GameRoute = GameRoute;

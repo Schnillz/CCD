@@ -1,3 +1,4 @@
 src/**/*.js
+*.baseDir*
 routes/**/*.js
 node_modules/

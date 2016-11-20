@@ -9,43 +9,31 @@ import { GameRoute } from "./game";
  */
 export class IndexRoute extends BaseRoute {
 
-  /**
-   * Create the routes.
-   *
-   * @class IndexRoute
-   * @method create
-   * @static
-   */
-  public static create(router: Router) {
+private router: Router;
 
-    //log
+/**
+ * Constructor
+ *
+ * @class GameRoute
+ * @constructor
+ */
+  constructor(router: Router) {
+    // log
     console.log("[IndexRoute::create] Creating index route.");
+    super();
+    this.router = router;
+    this.setRoutes();
+  }
 
+  // prepare all (stateless) routes
+  private setRoutes(): void{
     //add home page route
-    router.get("/", (req: Request, res: Response, next: NextFunction) => {
-      new IndexRoute().index(req, res, next);
+    this.router.get("/", (req: Request, res: Response, next: NextFunction) => {
+      this.index(req, res, next);
     });
   }
 
-  /**
-   * Constructor
-   *
-   * @class IndexRoute
-   * @constructor
-   */
-  constructor() {
-    super();
-  }
-
-  /**
-   * The home page route.
-   *
-   * @class IndexRoute
-   * @method index
-   * @param req {Request} The express Request object.
-   * @param res {Response} The express Response object.
-   * @next {NextFunction} Execute the next method.
-   */
+  // no need for controller right now
   public index(req: Request, res: Response, next: NextFunction) {
 
     //set options

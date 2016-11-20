@@ -14,25 +14,16 @@ export class Matches extends Game {
    * @class MatchGame
    * @constructor
    */
-  constructor(starting_player: boolean, matches_left: number) {
-    super("Das Streichholzspiel", "Das Spiel beginnt", starting_player);
+  constructor(matches_left: number) {
+    super("Das Streichholzspiel");
     this.matches_left = matches_left;
   }
 
-  private switch_player(): void{
-    this.current_player = !this.current_player;
+  getNumberOfMatches(): number{
+    return this.matches_left;
   }
 
-  private subtract_matches(matches: number){
-
-    if(matches > this.matches_left){
-
-    }else if(matches === this.matches_left){
-
-    }else{
-      this.matches_left = this.matches_left - matches;
-    }
-
+  setNumberOfMatches(matches: number){
+    this.matches_left = matches;
   }
-
 }

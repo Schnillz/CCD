@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-import { Game } from "../games/game";
+import { GameController } from "../games/game.controller";
+import { MatchesController } from "../games/matches.controller";
 import { Matches } from "../games/matches";
 
 /**
@@ -10,66 +11,40 @@ import { Matches } from "../games/matches";
  */
 export class GameRoute extends BaseRoute {
 
-  private game: Game;
+    private router: Router;
+    private gameController: GameController;
 
-  /**
-   * Create the routes.
-   *
-   * @class IndexRoute
-   * @method create
-   * @static
-   */
-  public static create(router: Router) {
-    //log
-    console.log("[GameRoute::create] Creating game route.");
+    /**
+     * Constructor
+     *
+     * @class GameRoute
+     * @constructor
+     */
+    constructor(router: Router) {
+        // log
+        console.log("[GameRoute::create] Creating game route.");
+        super();
+        this.router = router;
+        this.gameController = new MatchesController();
+        this.setRoutes();
+    }
 
-    //add home page route
-    router.get("/game", (req: Request, res: Response, next: NextFunction) => {
-      if( req.body.which_player === undefined || req.body.number_matches == undefined){
-        res.redirect("/");
-      }
-      new GameRoute().index(req, res, next);
-    });
+    // prepare all (stateless) routes
+    private setRoutes(): void {
 
-    router.post('/game', (req: Request, res: Response, next: NextFunction) =>{
-      if( req.body.which_player === undefined || req.body.number_matches == undefined){
-        res.redirect("/");
-      }
-      new GameRoute().index(req, res, next);
-    })
-
-  }
-
-  /**
-   * Constructor
-   *
-   * @class IndexRoute
-   * @constructor
-   */
-  constructor() {
-
-    super();
-  }
-
-  /**
-   * The home page route.
-   *
-   * @class IndexRoute
-   * @method index
-   * @param req {Request} The express Request object.
-   * @param res {Response} The express Response object.
-   * @next {NextFunction} Execute the next method.
-   */
-  public index(req: Request, res: Response, next: NextFunction) {
-
-    //set options
-    let options: Object = {
-      "page_title": "Das Streichholzspiel",
-      "which_player": req.body.which_player,
-      "matches_left": req.body.number_matches
-    };
-
-    //render template
-    this.render(req, res, "game", options);
-  }
+        // if no post params redirect to index
+        this.router.all('/matches', (req: Request, res: Response, next: NextFunction) => {
+            if (req.body === undefined) res.redirect("/");
+            next();
+        })
+        // receive post requests from views
+        this.router.post('/matches', (req: Request, res: Response, next: NextFunction) => {
+            // check who is caller
+            if(req.body.number_matches !== undefined){
+              this.gameController.start_game(req, res, this);
+            }else{
+              this.gameController.continue_game(req, res, this);
+            }
+        })
+    }
 }

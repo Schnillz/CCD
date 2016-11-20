@@ -1,13 +1,15 @@
 "use strict";
 const route_1 = require("./route");
 class IndexRoute extends route_1.BaseRoute {
-    constructor() {
-        super();
-    }
-    static create(router) {
+    constructor(router) {
         console.log("[IndexRoute::create] Creating index route.");
-        router.get("/", (req, res, next) => {
-            new IndexRoute().index(req, res, next);
+        super();
+        this.router = router;
+        this.setRoutes();
+    }
+    setRoutes() {
+        this.router.get("/", (req, res, next) => {
+            this.index(req, res, next);
         });
     }
     index(req, res, next) {

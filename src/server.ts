@@ -111,8 +111,8 @@ export class Server {
       router = express.Router();
 
       //MainRoutes
-      IndexRoute.create(router);
-      GameRoute.create(router);
+      new IndexRoute(router);
+      new GameRoute(router);
 
       //use router middleware
       this.app.use(router);

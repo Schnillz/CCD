@@ -40,8 +40,8 @@ class Server {
     routes() {
         let router;
         router = express.Router();
-        index_1.IndexRoute.create(router);
-        game_1.GameRoute.create(router);
+        new index_1.IndexRoute(router);
+        new game_1.GameRoute(router);
         this.app.use(router);
     }
 }

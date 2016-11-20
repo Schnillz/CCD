@@ -1,9 +1,10 @@
 "use strict";
 class Game {
-    constructor(name, message, player) {
+    constructor(name) {
         this.name = name;
-        this.message = message;
-        this.current_player = player;
+    }
+    getName() {
+        return this.name;
     }
 }
 exports.Game = Game;

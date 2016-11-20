@@ -7,8 +7,6 @@
 export abstract class Game {
 
   private name: String;
-  private message: String;
-  protected current_player: boolean;
 
   /**
    * Constructor
@@ -16,10 +14,12 @@ export abstract class Game {
    * @class Game
    * @constructor
    */
-  constructor(name: String, message: String, player: boolean ) {
+  constructor(name: String) {
     this.name = name;
-    this.message = message;
-    this.current_player = player;
+  }
+
+  public getName(): String{
+    return this.name;
   }
 
 }
