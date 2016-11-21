@@ -2,6 +2,7 @@ import { NextFunction, Request, Response} from "express";
 import { BaseRoute } from "../routes/route";
 
 /**
+ * basic attributes and methods for games
  *
  * @class GameController
  */

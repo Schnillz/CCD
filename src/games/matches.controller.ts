@@ -4,8 +4,9 @@ import { Matches } from "./matches";
 import { GameController } from "./game.controller"
 
 /**
+ * holds gamestate and offers methods to play the match game
  *
- * @class GameController
+ * @class MatchesController
  */
 export class MatchesController extends GameController {
 
