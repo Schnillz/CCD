@@ -1,15 +1,15 @@
 import { Game } from "./game";
+
 /**
- * / route
  *
- * @class MatchGame
+ * @class Matches
  */
 export class Matches extends Game {
 
   private matches_left: number;
 
   /**
-   * Constructor
+   * / model
    *
    * @class MatchGame
    * @constructor

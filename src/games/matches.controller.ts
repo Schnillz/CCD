@@ -12,6 +12,11 @@ export class MatchesController extends GameController {
     private game: Matches; // current_game
     private last_computer_move: number = 0;
 
+    /**
+     * / controller
+     *
+     * @class MatchesController
+     */
     constructor() {
         super();
     }
@@ -33,7 +38,7 @@ export class MatchesController extends GameController {
         this.render_frontend(req, res, router);
     }
 
-    // gets called after each post request
+    // gets called after each post request when game is running
     public continue_game(req: Request, res: Response, router: GameRoute): void {
 
         let matches_subtract = +req.body.matches_subtract;

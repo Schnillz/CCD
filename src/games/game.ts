@@ -1,15 +1,14 @@
 
 /**
- * / route
  *
- * @class MatchGame
+ * @class Game
  */
 export abstract class Game {
 
   private name: String;
 
   /**
-   * Constructor
+   * / model
    *
    * @class Game
    * @constructor
