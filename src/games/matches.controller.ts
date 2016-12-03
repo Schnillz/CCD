@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response} from "express";
-import { GameRoute } from "../routes/game";
 import { Matches } from "./matches";
 import { GameController } from "./game.controller"
 
@@ -23,7 +22,7 @@ export class MatchesController extends GameController {
     }
 
     // gets called once a game is started from index
-    public start_game(req: Request, res: Response, router: GameRoute): void {
+    public start_game(req: Request, res: Response): void {
 
         let start_player = req.body.start_player;
         let number_matches = req.body.number_matches;
@@ -36,11 +35,11 @@ export class MatchesController extends GameController {
             this.computer_move();
         }
         // show game in frontend
-        this.render_frontend(req, res, router);
+        this.render_frontend(req, res);
     }
 
     // gets called after each post request when game is running
-    public continue_game(req: Request, res: Response, router: GameRoute): void {
+    public continue_game(req: Request, res: Response): void {
 
         let matches_subtract = +req.body.matches_subtract;
         let matches_left = this.game.getNumberOfMatches();
@@ -58,7 +57,7 @@ export class MatchesController extends GameController {
           }
         }
         // show game in frontend
-        this.render_frontend(req, res, router);
+        this.render_frontend(req, res);
     }
 
     // implements winner strategy of computer
@@ -98,7 +97,7 @@ export class MatchesController extends GameController {
     }
 
     // render view after each round with updated optionset
-    private render_frontend(req: Request, res: Response, router: GameRoute): void {
+    private render_frontend(req: Request, res: Response): void {
 
         let message;
         let options;
@@ -122,11 +121,10 @@ export class MatchesController extends GameController {
         };
 
         // render template
-        router.render(req, res, "game", options);
+        res.render("game", options);
     }
 
     private calculate_random_number(min: number, max: number): number {
         return Math.floor(Math.random() * max) + min;
     }
-
 }

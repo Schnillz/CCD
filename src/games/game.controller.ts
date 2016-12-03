@@ -17,15 +17,14 @@ export abstract class GameController {
    *
    * @class GameController
    */
-  constructor() {
-    this.counter = 1;
-  }
+  constructor() {}
+
   public switch_player(): void{
       this.current_player = !this.current_player;
   }
   // gets called once a game is started from index
-  abstract start_game(req: Request, res: Response, router: BaseRoute): void;
+  abstract start_game(req: Request, res: Response): void;
   // gets called after each post request when game is running
-  abstract continue_game(req: Request, res: Response, router: BaseRoute): void;
+  abstract continue_game(req: Request, res: Response): void;
 
 }

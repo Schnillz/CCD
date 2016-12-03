@@ -31,7 +31,6 @@ export class GameRoute extends BaseRoute {
 
     // prepare all (stateless) routes
     private setRoutes(): void {
-
         // if no post params redirect to index
         this.router.all('/matches', (req: Request, res: Response, next: NextFunction) => {
             if (req.body === undefined) res.redirect("/");
@@ -41,9 +40,9 @@ export class GameRoute extends BaseRoute {
         this.router.post('/matches', (req: Request, res: Response, next: NextFunction) => {
             // check who is caller
             if(req.body.number_matches !== undefined){
-              this.gameController.start_game(req, res, this);
+              this.gameController.start_game(req, res);
             }else{
-              this.gameController.continue_game(req, res, this);
+              this.gameController.continue_game(req, res);
             }
         })
     }

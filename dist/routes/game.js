@@ -17,10 +17,10 @@ class GameRoute extends route_1.BaseRoute {
         });
         this.router.post('/matches', (req, res, next) => {
             if (req.body.number_matches !== undefined) {
-                this.gameController.start_game(req, res, this);
+                this.gameController.start_game(req, res);
             }
             else {
-                this.gameController.continue_game(req, res, this);
+                this.gameController.continue_game(req, res);
             }
         });
     }

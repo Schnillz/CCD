@@ -6,7 +6,7 @@ class MatchesController extends game_controller_1.GameController {
         super();
         this.last_computer_move = 0;
     }
-    start_game(req, res, router) {
+    start_game(req, res) {
         let start_player = req.body.start_player;
         let number_matches = req.body.number_matches;
         this.game = new matches_1.Matches(number_matches);
@@ -14,9 +14,9 @@ class MatchesController extends game_controller_1.GameController {
         if (start_player === "B") {
             this.computer_move();
         }
-        this.render_frontend(req, res, router);
+        this.render_frontend(req, res);
     }
-    continue_game(req, res, router) {
+    continue_game(req, res) {
         let matches_subtract = +req.body.matches_subtract;
         let matches_left = this.game.getNumberOfMatches();
         if (!isNaN(matches_subtract)) {
@@ -27,7 +27,7 @@ class MatchesController extends game_controller_1.GameController {
                 this.computer_move();
             }
         }
-        this.render_frontend(req, res, router);
+        this.render_frontend(req, res);
     }
     computer_move() {
         let matches_left = this.game.getNumberOfMatches();
@@ -55,7 +55,7 @@ class MatchesController extends game_controller_1.GameController {
         }
         return false;
     }
-    render_frontend(req, res, router) {
+    render_frontend(req, res) {
         let message;
         let options;
         if (this.game_over()) {
@@ -74,7 +74,7 @@ class MatchesController extends game_controller_1.GameController {
             "message": message,
             "counter": this.counter
         };
-        router.render(req, res, "game", options);
+        res.render("game", options);
     }
     calculate_random_number(min, max) {
         return Math.floor(Math.random() * max) + min;

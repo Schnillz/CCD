@@ -3,5 +3,6 @@ src/**/*.js
 routes/**/*.js
 node_modules/
 .idea
-.tscache/*
+.tscache/**/*
 tscommand*
+dist/**/*
