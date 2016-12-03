@@ -1,1 +1,0 @@
-"/Users/ilkohoffmann/Entwicklung/node/Streichholz/src/routes/index.ts" "/Users/ilkohoffmann/Entwicklung/node/Streichholz/src/routes/route.ts" "/Users/ilkohoffmann/Entwicklung/node/Streichholz/src/server.ts" "/Users/ilkohoffmann/Entwicklung/node/Streichholz/src/.baseDir.ts" --removeComments --target ES6 --module commonjs --outDir ./dist
