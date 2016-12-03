@@ -2,7 +2,7 @@ src/**/*.js
 *.baseDir*
 routes/**/*.js
 node_modules/
-.idea
-.tscache/**/*
+.idea/
+.tscache/
 tscommand*
 dist/**/*
